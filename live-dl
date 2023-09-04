@@ -1559,7 +1559,7 @@ function func_download_youtube() {
     if [ "$PARAM_AUDIO_ONLY" == "true" ]; then
       FORTMAT_OPTION="bestaudio[ext=m4a]"
     else
-      FORTMAT_OPTION="bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
+      FORTMAT_OPTION="bestvideo[width>=2000][ext=webm]+bestaudio[ext=webm]/bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
     fi
 
     if [ "$DL_TYPE" == "playlist" ]; then
@@ -1576,8 +1576,7 @@ function func_download_youtube() {
         --external-downloader-args '-j 16 --retry-wait 10 --max-tries 10' \
         -f "$FORTMAT_OPTION" \
         --retries 30 \
-		    --cookies "$COOKIES_FILE" \
-		    --merge-output-format mp4 \
+        --cookies "$COOKIES_FILE" \
         -o "$OUTPUT_PATH.%(ext)s" \
         "${WEBPAGE_URL}" >> "$LOG_PATH" 2>&1
     else
@@ -1587,8 +1586,7 @@ function func_download_youtube() {
         --external-downloader-args '-j 16 --retry-wait 10 --max-tries 10' \
         -f "$FORTMAT_OPTION" \
         --retries 30 \
-		    --cookies "$COOKIES_FILE" \
-		    --merge-output-format mp4 \
+        --cookies "$COOKIES_FILE" \
         -o "$OUTPUT_PATH.%(ext)s" \
         "${WEBPAGE_URL}" >> "$LOG_PATH" 2>&1
     fi
