@@ -1337,7 +1337,7 @@ function func_process_youtube_metadata() {
 
   # Filename (without path)
   # Remove TITLE function
-  if [ $REMOVE_TITLE == "true" ]; then
+  if [ "$REMOVE_TITLE" == "true" ]; then
       __info "Running remove title function..."
       FILENAME=$(echo "$UPLOAD_DATE ($VIDEO_ID)")
   else
@@ -1481,10 +1481,10 @@ Hostname:  $HOSTNAME
 function func_archive_chat() {
   local _type=$1
 
-  if [ $ARCHIVE_CHAT == "true" ]; then
+  if [ "$ARCHIVE_CHAT" == "true" ]; then
     __info "Calling chat-downloader to run archive chat."
 
-    if [ $ARCHIVE_CHAT_MODE == "simple" ]; then
+    if [ "$ARCHIVE_CHAT_MODE" == "simple" ]; then
       __debug "Running simple mode."
       chat_downloader \
         --cookies "$COOKIES_FILE" \
@@ -1493,7 +1493,7 @@ function func_archive_chat() {
         --output "${OUTPUT_PATH}-chat.txt" \
         "${WEBPAGE_URL}" >/dev/null 2>&1
 
-    elif [ $ARCHIVE_CHAT_MODE == "full" ]; then
+    elif [ "$ARCHIVE_CHAT_MODE" == "full" ]; then
       __debug "Running full mode."
       chat_downloader \
         --cookies "$COOKIES_FILE" \
@@ -1753,8 +1753,8 @@ Path:      $HOSTNAME:$OUTPUT_FILE
 }
 
 function func_callback() {
-  if [ $CALLBACK == "true" ]; then
-    if [ $CALLBACK_EXEC != "/dev/null" ]; then
+  if [ "$CALLBACK" == "true" ]; then
+    if [ "$CALLBACK_EXEC" != "/dev/null" ]; then
       __info "Calling callback function..."
       local cmd=( "$CALLBACK_EXEC" "${OUTPUT_PATH}.mp4" "$BASE_DIR/" "$VIDEO_ID" "$FULLTITLE" "$UPLOADER" "$UPLOAD_DATE" )
       nohup "${cmd[@]}" &>> "$LOG_PATH" &
